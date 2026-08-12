@@ -10,6 +10,7 @@ from cash_management.cash_flow_reconciler import reconcile_cash_flow
 from foreign_exchange.fx_converter import convert_currency
 from banking_reports.statement_date_formatter import format_statement_date
 from compliance_and_kyc.kyc_validator import validate_kyc
+from investments.investment_roi import calculate_investment
 
 
 # print("TRANSACTION RISK SCORING ENGINE")
@@ -18,13 +19,11 @@ from compliance_and_kyc.kyc_validator import validate_kyc
 # BASE_DIR = Path(__file__).resolve().parent
 # TRANSACTION_FILE = BASE_DIR / "risk_and_fraud" / "transactions.json"
 
-
 # def load_transactions():
 #     with open(TRANSACTION_FILE, "r") as file:
 #         data = json.load(file)
 
 #     return data["transactions"]
-
 
 # def save_transaction(transaction):
 #     with open(TRANSACTION_FILE, "r") as file:
@@ -119,7 +118,6 @@ from compliance_and_kyc.kyc_validator import validate_kyc
 # print("------------------------")
 
 # account_number = input("Enter account number: ")
-
 # sanitized_number = sanitize_account_number(account_number)
 
 # if sanitized_number is not None:
@@ -149,11 +147,9 @@ from compliance_and_kyc.kyc_validator import validate_kyc
 # with open(CASH_FLOW_FILE, "r") as file:
 #     cash_flow = json.load(file)
 
-
 # number_of_transactions = int(
 #     input("How many transactions do you want to enter? ")
 # )
-
 
 # for i in range(number_of_transactions):
 
@@ -224,11 +220,8 @@ from compliance_and_kyc.kyc_validator import validate_kyc
 
 
 # if amount <= 0:
-
 #     print("Amount must be greater than zero.")
-
 # else:
-
 #     results = convert_currency(amount)
 
 #     print("\nCURRENCY CONVERSION")
@@ -282,13 +275,11 @@ from compliance_and_kyc.kyc_validator import validate_kyc
 # print("----------------------------")
 
 # if anomalies:
-
 #     print("Suspicious transactions:")
 
 #     for transaction in anomalies:
 #         print(transaction)
 # else:
-
 #     print("No suspicious transactions found.")
 
 
@@ -303,6 +294,8 @@ from compliance_and_kyc.kyc_validator import validate_kyc
 
 
 # STATEMENT DATE FORMATTER
+# print("\nSTATEMENT DATE FORMATTER")
+# print("------------------------")
 # timestamp = input("Enter timestamp: ")
 
 # formatted_date = format_statement_date(timestamp)
@@ -320,19 +313,67 @@ from compliance_and_kyc.kyc_validator import validate_kyc
 
 
 # KYC_VALIDATOR
-bvn = input("Enter BVN: ").strip()
-nin = input("Enter NIN: ").strip()
-full_name = input("Enter full name: ").strip()
-dob = input("Enter date of birth: ").strip()
+# print("\nKYC VALIDATOR")
+# print("-------------")
+# bvn = input("Enter BVN: ").strip()
+# nin = input("Enter NIN: ").strip()
+# full_name = input("Enter full name: ").strip()
+# dob = input("Enter date of birth: ").strip()
 
-user_data = {
-    "bvn": bvn,
-    "nin": nin,
-    "full_name": full_name,
-    "dob": dob
-}
+# user_data = {
+#     "bvn": bvn,
+#     "nin": nin,
+#     "full_name": full_name,
+#     "dob": dob
+# }
 
-if validate_kyc(user_data):
-    print("KYC data is valid.")
+# if validate_kyc(user_data):
+#     print("KYC data is valid.")
+# else:
+#     print("KYC data is invalid.")
+
+
+
+
+
+
+
+
+
+
+# INVESTMENT_ROI
+print("\nINVESTMENT ROI")
+print("--------------")
+purchase_price = float(input("Enter asset purchase price: "))
+current_value = float(input("Enter current market value: "))
+dividend_yield = float(input("Enter dividend yield percentage: "))
+
+
+if purchase_price <= 0:
+    print("Purchase price must be greater than zero.")
+
+elif current_value < 0:
+    print("Current market value cannot be negative.")
+
+elif dividend_yield < 0:
+    print("Dividend yield cannot be negative.")
+
 else:
-    print("KYC data is invalid.")
+    result = calculate_investment(
+        purchase_price,
+        current_value,
+        dividend_yield
+    )
+
+    print("\nINVESTMENT SUMMARY")
+    print("------------------")
+
+    print(
+        f"Net Annualized ROI: "
+        f"{result['net_annualized_roi']}%"
+    )
+
+    print(
+        f"Projected Quarterly Dividend: "
+        f"{result['quarterly_dividend']:,.2f}"
+    )
