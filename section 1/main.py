@@ -8,6 +8,8 @@ from lending.loan_eligibility import calculate_loan
 from account_services.account_sanitizer import sanitize_account_number
 from cash_management.cash_flow_reconciler import reconcile_cash_flow
 from foreign_exchange.fx_converter import convert_currency
+from banking_reports.statement_date_formatter import format_statement_date
+from compliance_and_kyc.kyc_validator import validate_kyc
 
 
 # print("TRANSACTION RISK SCORING ENGINE")
@@ -247,44 +249,90 @@ from foreign_exchange.fx_converter import convert_currency
 
 
 # ANOMALY DETECTOR
-from risk_and_fraud.anomaly_detector import detect_anomalies
+# from risk_and_fraud.anomaly_detector import detect_anomalies
 
-transactions = [
-    {
-        "tx_id": 101,
-        "amount": 50000
-    },
-    {
-        "tx_id": 102,
-        "amount": 45000
-    },
-    {
-        "tx_id": 103,
-        "amount": 55000
-    },
-    {
-        "tx_id": 104,
-        "amount": 500000
-    },
-    {
-        "tx_id": 105,
-        "amount": 40000
-    }
-]
-
-
-anomalies = detect_anomalies(transactions)
+# transactions = [
+#     {
+#         "tx_id": 101,
+#         "amount": 50000
+#     },
+#     {
+#         "tx_id": 102,
+#         "amount": 45000
+#     },
+#     {
+#         "tx_id": 103,
+#         "amount": 55000
+#     },
+#     {
+#         "tx_id": 104,
+#         "amount": 500000
+#     },
+#     {
+#         "tx_id": 105,
+#         "amount": 40000
+#     }
+# ]
 
 
-print("FRAUDULENT ANOMALY DETECTOR")
-print("----------------------------")
+# anomalies = detect_anomalies(transactions)
 
-if anomalies:
 
-    print("Suspicious transactions:")
+# print("FRAUDULENT ANOMALY DETECTOR")
+# print("----------------------------")
 
-    for transaction in anomalies:
-        print(transaction)
+# if anomalies:
+
+#     print("Suspicious transactions:")
+
+#     for transaction in anomalies:
+#         print(transaction)
+# else:
+
+#     print("No suspicious transactions found.")
+
+
+
+
+
+
+
+
+
+
+
+
+# STATEMENT DATE FORMATTER
+# timestamp = input("Enter timestamp: ")
+
+# formatted_date = format_statement_date(timestamp)
+
+# print("Formatted statement date:", formatted_date)
+
+
+
+
+
+
+
+
+
+
+
+# KYC_VALIDATOR
+bvn = input("Enter BVN: ").strip()
+nin = input("Enter NIN: ").strip()
+full_name = input("Enter full name: ").strip()
+dob = input("Enter date of birth: ").strip()
+
+user_data = {
+    "bvn": bvn,
+    "nin": nin,
+    "full_name": full_name,
+    "dob": dob
+}
+
+if validate_kyc(user_data):
+    print("KYC data is valid.")
 else:
-
-    print("No suspicious transactions found.")
+    print("KYC data is invalid.")
