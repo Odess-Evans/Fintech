@@ -217,23 +217,74 @@ from foreign_exchange.fx_converter import convert_currency
 
 
 
-# FX_CONVERTER
-amount = float(input("Enter amount in NGN: "))
+# # FX_CONVERTER
+# amount = float(input("Enter amount in NGN: "))
 
 
-if amount <= 0:
+# if amount <= 0:
 
-    print("Amount must be greater than zero.")
+#     print("Amount must be greater than zero.")
 
+# else:
+
+#     results = convert_currency(amount)
+
+#     print("\nCURRENCY CONVERSION")
+#     print("-------------------")
+
+#     print(f"NGN {amount:,.2f}")
+
+#     for currency, value in results.items():
+
+#         print(f"{currency}: {value:,.2f}")
+
+
+
+
+
+
+
+
+
+# ANOMALY DETECTOR
+from risk_and_fraud.anomaly_detector import detect_anomalies
+
+transactions = [
+    {
+        "tx_id": 101,
+        "amount": 50000
+    },
+    {
+        "tx_id": 102,
+        "amount": 45000
+    },
+    {
+        "tx_id": 103,
+        "amount": 55000
+    },
+    {
+        "tx_id": 104,
+        "amount": 500000
+    },
+    {
+        "tx_id": 105,
+        "amount": 40000
+    }
+]
+
+
+anomalies = detect_anomalies(transactions)
+
+
+print("FRAUDULENT ANOMALY DETECTOR")
+print("----------------------------")
+
+if anomalies:
+
+    print("Suspicious transactions:")
+
+    for transaction in anomalies:
+        print(transaction)
 else:
 
-    results = convert_currency(amount)
-
-    print("\nCURRENCY CONVERSION")
-    print("-------------------")
-
-    print(f"NGN {amount:,.2f}")
-
-    for currency, value in results.items():
-
-        print(f"{currency}: {value:,.2f}")
+    print("No suspicious transactions found.")
