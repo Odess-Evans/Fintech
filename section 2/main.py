@@ -160,7 +160,7 @@ def main():
         "tx_id": transaction.tx_id,
         "sender": transaction.sender,
         "receiver": transaction.receiver,
-        "amount": transaction.amount
+        "amount": transaction.amount,
         "timestamp": str(transaction.timestamp),
         "status": transaction.status
     })
