@@ -6,7 +6,12 @@ from datetime import datetime
 from risk_and_fraud.transaction_risk import evaluate_risk, check_velocity
 from lending.loan_eligibility import calculate_loan
 from account_services.account_sanitizer import sanitize_account_number
+from cash_management.cash_flow_reconciler import reconcile_cash_flow
+from foreign_exchange.fx_converter import convert_currency
 
+
+# print("TRANSACTION RISK SCORING ENGINE")
+# print("-------------------------------")
 
 # BASE_DIR = Path(__file__).resolve().parent
 # TRANSACTION_FILE = BASE_DIR / "risk_and_fraud" / "transactions.json"
@@ -79,6 +84,7 @@ from account_services.account_sanitizer import sanitize_account_number
 
 # LOAN ELIGIBILITY
 # print("LOAN ELIGIBILITY CALCULATOR")
+# print("---------------------------")
 
 # credit_score = int(input("Enter credit score: "))
 # annual_income = float(input("Enter annual income: "))
@@ -107,13 +113,127 @@ from account_services.account_sanitizer import sanitize_account_number
 
 
 # account_sanitizer
-print("ACCOUNT NUMBER SANITIZER")
+# print("ACCOUNT NUMBER SANITIZER")
+# print("------------------------")
 
-account_number = input("Enter account number: ")
+# account_number = input("Enter account number: ")
 
-sanitized_number = sanitize_account_number(account_number)
+# sanitized_number = sanitize_account_number(account_number)
 
-if sanitized_number is not None:
-    print("Sanitized account number:", sanitized_number)
+# if sanitized_number is not None:
+#     print("Sanitized account number:", sanitized_number)
+# else:
+#     print("Invalid account number. Account number must contain exactly 10 digits.")
+
+
+
+
+
+
+
+
+
+
+
+
+# CASH FLOW RECONCILER
+# BASE_DIR = Path(__file__).resolve().parent
+
+# CASH_FLOW_FILE = (
+#     BASE_DIR / "cash_management" / "cash_flow.json"
+# )
+
+
+# with open(CASH_FLOW_FILE, "r") as file:
+#     cash_flow = json.load(file)
+
+
+# number_of_transactions = int(
+#     input("How many transactions do you want to enter? ")
+# )
+
+
+# for i in range(number_of_transactions):
+
+#     print(f"\nTransaction {i + 1}")
+
+#     transaction_type = input(
+#         "Enter type (credit/debit): "
+#     ).strip().lower()
+
+#     description = input(
+#         "Enter description: "
+#     ).strip()
+
+#     amount = float(
+#         input("Enter amount: ")
+#     )
+
+#     transaction = {
+#         "type": transaction_type,
+#         "description": description,
+#         "amount": amount
+#     }
+
+#     cash_flow["transactions"].insert(0, transaction)
+
+
+# with open(CASH_FLOW_FILE, "w") as file:
+#     json.dump(cash_flow, file, indent=4)
+
+
+# result = reconcile_cash_flow(cash_flow)
+
+
+# print("\nDAILY CASH FLOW RECONCILER")
+# print("--------------------------")
+
+# print(
+#     "Opening balance:",
+#     result["opening_balance"]
+# )
+# print(
+#     "Total credits:",
+#     result["total_credits"]
+# )
+# print(
+#     "Total debits:",
+#     result["total_debits"]
+# )
+# print(
+#     "Closing balance:",
+#     result["closing_balance"]
+# )
+# print(
+#     "Net change:",
+#     result["net_change"]
+# )
+
+
+
+
+
+
+
+
+
+# FX_CONVERTER
+amount = float(input("Enter amount in NGN: "))
+
+
+if amount <= 0:
+
+    print("Amount must be greater than zero.")
+
 else:
-    print("Invalid account number. Account number must contain exactly 10 digits.")
+
+    results = convert_currency(amount)
+
+    print("\nCURRENCY CONVERSION")
+    print("-------------------")
+
+    print(f"NGN {amount:,.2f}")
+
+    for currency, value in results.items():
+
+        print(f"{currency}: {value:,.2f}")

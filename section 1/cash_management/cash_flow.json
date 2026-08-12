@@ -1,0 +1,35 @@
+{
+    "opening_balance": 100000,
+    "transactions": [
+        {
+            "type": "debit",
+            "description": "light bill",
+            "amount": 1000.0
+        },
+        {
+            "type": "credit",
+            "description": "Salary",
+            "amount": 50000
+        },
+        {
+            "type": "credit",
+            "description": "Deposit",
+            "amount": 30000
+        },
+        {
+            "type": "debit",
+            "description": "Rent",
+            "amount": 20000
+        },
+        {
+            "type": "debit",
+            "description": "Food",
+            "amount": 10000
+        },
+        {
+            "type": "credit",
+            "description": "hospital bill",
+            "amount": 2000.0
+        }
+    ]
+}
